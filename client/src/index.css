@@ -21,13 +21,14 @@ body {
 }
 
 .App {
-	padding: 32px;
+	padding: 32px 64px 64px;
 }
 
 h1 {
 	font-size: 40px;
 	font-weight: 700;
 	margin-bottom: 32px;
+	margin-top: 32px;
 }
 
 h4 {
@@ -167,4 +168,18 @@ h4 {
 	margin-top: 16px;
 	text-align: center;
 	cursor: pointer;
+}
+
+
+.navbar {
+	font-size: 1.3rem;
+	position: fixed;
+	right: 48px;
+}
+
+a {
+	text-decoration: none;
+	color: var(--light);
+	display: inline-block;
+	margin-right: 16px;
 }
