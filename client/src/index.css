@@ -1,10 +1,18 @@
-:root{
-  --primary: #007BFF;  
-  --secondary:  #8E8E8E;   
-  --light: #F8F9FA;        
-  --light-alt: #53B0AE;   
-  --dark: #343A40;         
-  --dark-alt: #6C757D;    
+:root {
+	--primary: #D81E5B;
+	--secondary: #8A4EFC;
+	--light: #EEE;
+	--light-alt: #61759b;
+	--dark: #131A26;
+	--dark-alt: #202B3E;
+	/*
+	--primary: #007BFF;
+	--secondary: #8E8E8E;
+	--light: #F8F9FA;
+	--light-alt: #53B0AE;
+	--dark: #343A40;
+	--dark-alt: #6C757D;
+	*/
 }
 
 * {
@@ -28,7 +36,7 @@ h1 {
 	font-size: 40px;
 	font-weight: 700;
 	margin-bottom: 32px;
-	margin-top: 32px;
+	margin-top: 40px;
 }
 
 h4 {
@@ -109,7 +117,7 @@ h4 {
 	font-weight: 900;
 	color: var(--light);
 	background-color: var(--primary);
-	background-image: linear-gradient(to bottom right, var(--primary), var( --light-alt));
+	background-image: linear-gradient(to bottom right, var(--primary), var(--secondary));
 	cursor: pointer;
 }
 
@@ -145,14 +153,17 @@ h4 {
 	text-transform: uppercase;
 }
 
-.add-todo-input {
+.add-todo-input, .form-input {
 	appearance: none;
 	outline: none;
 	border: none;
 	background-color: #FFF;
 	padding: 16px;
+	box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.2);
+}
+
+.add-todo-input {
 	border-radius: 16px;
-	width: 100%;
 	box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.2);
 	font-size: 20px;
 }
@@ -160,7 +171,7 @@ h4 {
 .button {
 	padding: 16px 32px;
 	border-radius: 999px;
-	background-image: linear-gradient(to right, var(--primary), var( --light-alt));
+	background-image: linear-gradient(to right, var(--primary), var(--secondary));
 	display: inline-block;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -170,11 +181,23 @@ h4 {
 	cursor: pointer;
 }
 
+.nav-div {
+	display: flex;
+	align-items: center;
+}
 
 .navbar {
 	font-size: 1.3rem;
 	position: fixed;
 	right: 48px;
+	display: inline-block;
+}
+
+.logo {
+	font-weight: 700;
+	font-size: 2rem;
+	color: var(--primary);
+	position: fixed;
 }
 
 a {
@@ -182,4 +205,44 @@ a {
 	color: var(--light);
 	display: inline-block;
 	margin-right: 16px;
+}
+
+.login-form-div {
+	width: 512px;
+	display: flex;
+	justify-content: center;
+	padding: 16px;
+	margin: 128px auto 0;
+	border-radius: 12px;
+	background-color: var(--dark);
+	
+}
+
+.login-form {
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding: 32px 16px 32px;
+	font-size: 18px;
+}
+
+.form-input {
+	width: 100%;
+	height: 40px;
+	border-radius: 12px;
+	margin-bottom: 16px;
+}
+
+.submit-form-button {
+	padding: 6px;
+	border-radius: 999px;
+	background-image: linear-gradient(to right, var(--primary), var(--secondary));
+	text-transform: uppercase;
+	margin-top: 40px;
+	text-align: center;
+	cursor: pointer;
+	color: #FFF;
+    border: none;
 }

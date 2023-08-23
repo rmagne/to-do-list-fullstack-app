@@ -1,8 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const app = express();
+
+const salt = bcrypt.genSaltSync(10);
+const secret = ('vrcezr6fcererf4154r');
 
 app.use(express.json());
 app.use(cors());
@@ -16,6 +20,48 @@ mongoose.connect(db_uri, {
     .then(() => console.log("Connected to DB"))
     .catch(console.error);
 
+
+
+
+const User = require('./models/User')
+
+app.post('/register', async (req, res) => {
+    try {
+        const { newUser, newPassword } = req.body;
+        const user = await User.create({ Username: newUser, Password: bcrypt.hashSync(newPassword, salt) });
+        res.json(user);
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ error: err.message || 'An error occurred' });
+    }
+});
+
+
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body; 
+        console.log({username, password});
+        const user = await User.findOne({ Username: username });
+        const passOk = bcrypt.compareSync(password, user.Password);
+        if(passOk) {
+          jwt.sign({username, id:user._id}, secret, {}, (err, token) => {
+           if(err) throw err;
+           res.json(token);
+          });
+        } else {
+            res.status(400).json('Wrong credentials');
+        }
+
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ error: err.message || 'An error occurred' });
+    }
+});
+
+
+
+
+
 const Todo = require('./models/Todo');
 
 app.get('/todos', async (req, res) => {
@@ -26,7 +72,7 @@ app.get('/todos', async (req, res) => {
         res.json(todos);
 
     } catch (err) {
-        console.error;
+        console.error(err);
         res.status(500).json({ error: err.message || 'An error occurred' });
     }
 });

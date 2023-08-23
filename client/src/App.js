@@ -1,5 +1,7 @@
 import Todos from "./todos.js";
-import Header from "./header.js";
+import Login from "./login.js";
+import Register from "./register.js";
+import Layout from "./layout.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -7,13 +9,12 @@ function App() {
 
     return (
         <Router>
-           <Routes>
-                <Route index element={
-                    <div className="App">
-                        <Header />
-                        <Todos />
-                    </div>
-                } />
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                <Route index element={<Todos />} />
+                <Route path="/login" element={<Login />}/>
+                <Route path="/register" element={<Register />}/>
+                </Route>
             </Routes>
         </Router>
     );
