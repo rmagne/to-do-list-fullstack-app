@@ -63,7 +63,7 @@ function Todos() {
 
 
     return (
-        <><h1>Welcome, User</h1><h4>Your Tasks</h4><div className="todos">
+        <><h1>This is the welcome page</h1><h4>Your Tasks</h4><div className="todos">
             {todos.map(todo => (
                 <div className={"todo " + (todo.complete ? "is-complete" : "")} key={todo._id}>
 

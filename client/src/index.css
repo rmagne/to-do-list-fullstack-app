@@ -246,3 +246,7 @@ a {
 	color: #FFF;
     border: none;
 }
+
+a {
+	cursor: pointer;
+}

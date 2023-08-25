@@ -2,21 +2,27 @@ import Todos from "./todos.js";
 import Login from "./login.js";
 import Register from "./register.js";
 import Layout from "./layout.js";
+import UserContextProvider from "./userContext.js";
+import UserTodos from "./usertodo.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 
 function App() {
 
 
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                <Route index element={<Todos />} />
-                <Route path="/login" element={<Login />}/>
-                <Route path="/register" element={<Register />}/>
-                </Route>
-            </Routes>
-        </Router>
+        <UserContextProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<Todos />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/todos" element={<UserTodos/>}/>
+                    </Route>
+                </Routes>
+            </Router>
+        </UserContextProvider>
     );
 }
 
