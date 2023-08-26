@@ -28,7 +28,7 @@ function Login() {
     } else {
       alert('wrong credentials')
     };
-  }
+  };
 
   if (redirect) {
     return <Navigate to={'/todos'} />

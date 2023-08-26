@@ -15,7 +15,9 @@ function UserTodos() {
     }, []);
 
     const GetTodos = () => {
-        fetch(API_BASE + "/todos")
+        fetch(API_BASE + "/todos", {
+            credentials: 'include'
+        })
             .then(res => res.json())
             .then(data => setTodos(data))
             .catch(err => console.error("Error: ", err));
@@ -52,7 +54,8 @@ function UserTodos() {
             },
             body: JSON.stringify({
                 text: newTodo
-            })
+            }),
+            credentials: 'include'
         }).then(res => res.json());
 
         setTodos([...todos, data]);
@@ -63,7 +66,7 @@ function UserTodos() {
 
 
     return (
-        <><h1>Welcome, personalized User</h1><h4>Your Tasks</h4><div className="todos">
+        <><h1>Welcome</h1><h4>Your Tasks</h4><div className="todos">
             {todos.map(todo => (
                 <div className={"todo " + (todo.complete ? "is-complete" : "")} key={todo._id}>
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { UserContext } from "./userContext";
 
 
@@ -15,7 +15,7 @@ function Header() {
                 setUserInfo(userInfo);
             });
         });
-    }, []);
+    }, [setUserInfo]);
 
     function logout() {
         fetch(API_BASE + '/logout', {
@@ -35,7 +35,7 @@ function Header() {
                 <nav className="navbar">
                     {username && (
                         <>
-                            <a onClick={logout}>Logout</a>
+                            <a onClick={logout} href="/">Logout</a>
                         </>
                     )}
                     {!username && (

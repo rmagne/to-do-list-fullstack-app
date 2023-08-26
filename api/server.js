@@ -81,9 +81,13 @@ const Todo = require('./models/Todo');
 app.get('/todos', async (req, res) => {
 
     try {
-        const todos = await Todo.find();
+        const { token } = req.cookies;
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) throw err;
+        const todos = await Todo.find({user: info.id});
 
         res.json(todos);
+        })
 
     } catch (err) {
         console.error(err);
@@ -91,17 +95,23 @@ app.get('/todos', async (req, res) => {
     }
 });
 
-
-app.post('/todo/new', (req, res) => {
+app.post('/todo/new', async (req, res) => {
 
     try {
-        const todo = new Todo({
-            text: req.body.text
+        const { token } = req.cookies;
+
+
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) throw err;
+          
+            const todo = new Todo({
+                text: req.body.text,
+                user: info.id
+            });
+    
+           await todo.save();
+            res.json(todo);
         });
-
-        todo.save();
-
-        res.json(todo);
     } catch (err) {
         console.error;
         res.status(500).json({ error: err.message || 'An error occurred' });
