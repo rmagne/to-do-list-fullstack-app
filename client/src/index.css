@@ -178,12 +178,6 @@ h4 {
 	align-items: center;
 }
 
-/*.navbar {
-	font-size: 1.3rem;
-	position: fixed;
-	right: 48px;
-	display: inline-block;
-}*/
 
 a {
 	text-decoration: none;
@@ -236,15 +230,17 @@ a {
 	cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-	.login-form-div{
-	  width: 384px;
-	}
-}
 
   @media screen and (max-width: 512px) {
 	.login-form-div{
 	  width: 256px;
+	}
+	.popup {
+		width: 80%;
+	}
+	.content {
+		display: flex;
+		flex-direction: column;
 	}
   }
 
@@ -303,6 +299,11 @@ a:hover {
 
 
 @media (max-width: 768px) {
+	.login-form-div{
+		width: 384px;
+	  }
+
+
 	.logo {
 		padding-left: 32px;
 	}
