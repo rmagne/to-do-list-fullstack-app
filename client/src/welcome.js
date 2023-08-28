@@ -2,7 +2,7 @@ function Welcome() {
 
 
     return (
-        <><h1>This is the welcome page</h1><h4>Register and login to try the app</h4><div className="todos">
+        <><h1>Register and login to try the app</h1><h4>Here are a few todos examples</h4><div className="todos">
 
             <div className="todo">
 

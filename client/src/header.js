@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import { UserContext } from "./userContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const API_BASE = "http://localhost:3001";
 
 function Header() {
-    const {setUserInfo, userInfo} = useContext(UserContext);
+    const { setUserInfo, userInfo } = useContext(UserContext);
     useEffect(() => {
         fetch(API_BASE + '/profile', {
             credentials: 'include'
@@ -30,24 +33,40 @@ function Header() {
 
     return (
         <header>
-            <div className="nav-div">
-                <Link className="logo" to="/">MyTodolist</Link>
-                <nav className="navbar">
+            <nav>
+            <input type="checkbox" id="check"/>
+      <label for="check" class="checkbtn">
+      <FontAwesomeIcon icon={faBars} />
+      </label>
+                <a className="logo" href="/">MyTodolist</a>
+                <ul>
                     {username && (
-                        <>
-                            <a onClick={logout} href="/">Logout</a>
-                        </>
+                        <li>
+                            <>
+                                <a onClick={logout} href="/">Logout</a>
+                            </>
+                        </li>
                     )}
-                    {!username && (
-                        <>
-                            <Link to="/login">Login</Link>
-                            <Link to="/register">Register</Link>
-                        </>
-                    )}
-                </nav>
-            </div>
+                    <li>
+                        {!username && (
+                            <>
+                                <Link to="/login">Login</Link>
+                            </>
+                        )}
+                    </li>
+                    <li>
+                        {!username && (
+                            <>
+                                <Link to="/register">Register</Link>
+                            </>
+                        )}
+                    </li>
+                </ul>
+            </nav>
         </header>
     );
+
+
 }
 
 export default Header;

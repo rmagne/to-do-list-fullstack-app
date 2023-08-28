@@ -5,21 +5,14 @@
 	--light-alt: #61759b;
 	--dark: #131A26;
 	--dark-alt: #202B3E;
-	/*
-	--primary: #007BFF;
-	--secondary: #8E8E8E;
-	--light: #F8F9FA;
-	--light-alt: #53B0AE;
-	--dark: #343A40;
-	--dark-alt: #6C757D;
-	*/
+	
 }
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-
+    list-style: none;
 	font-family: "Fira Sans", sans-serif;
 }
 
@@ -27,9 +20,8 @@ body {
 	background-color: var(--dark-alt);
 	color: var(--light);
 }
-
-.App {
-	padding: 32px 64px 64px;
+.Outlet {
+	padding: 32px 64px 32px;
 }
 
 h1 {
@@ -186,19 +178,12 @@ h4 {
 	align-items: center;
 }
 
-.navbar {
+/*.navbar {
 	font-size: 1.3rem;
 	position: fixed;
 	right: 48px;
 	display: inline-block;
-}
-
-.logo {
-	font-weight: 700;
-	font-size: 2rem;
-	color: var(--primary);
-	position: fixed;
-}
+}*/
 
 a {
 	text-decoration: none;
@@ -249,4 +234,104 @@ a {
 
 a {
 	cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+	.login-form-div{
+	  width: 384px;
+	}
+}
+
+  @media screen and (max-width: 512px) {
+	.login-form-div{
+	  width: 256px;
+	}
+  }
+
+  
+
+.logo {
+	font-weight: 700;
+	font-size: 2rem;
+	color: var(--primary);
+	line-height: 80px;
+	padding: 0 64px;
+}
+
+nav {
+	height: 80px;
+	width: 100%;
+}
+
+nav ul {
+	float: right;
+	margin-right: 20px;
+}
+
+nav ul li {
+	display: inline-block;
+	line-height: 80px;
+	margin: 0 4px;
+}
+
+nav ul li a {
+	font-size: 16px;
+	text-transform: uppercase;
+	padding: 0 8px;
+	border-radius: 3px;
+}
+
+a:hover {
+	color: var(--primary);
+	transition: .5s;
+}
+
+.checkbtn {
+	font-size: 32px;
+	color: var(--light);
+	float: right;
+	line-height: 80px;
+	margin-right: 40px;
+	cursor: pointer;
+	display: none;
+}
+
+#check {
+	display: none;
+}
+
+
+
+@media (max-width: 768px) {
+	.logo {
+		padding-left: 32px;
+	}
+	.checkbtn {
+		display: block;
+	}
+
+	ul {
+		position: fixed;
+		width: 100%;
+		height: 24vh;
+		background: var(--dark);
+		top: 80px;
+		left: -100%;
+		transition: all .5s;
+		text-align: center;
+		z-index: 1;
+	}
+
+	nav ul li {
+		display: block;
+	}
+
+	nav ul li a {
+		font-size: 20px;
+	}
+
+	#check:checked ~ul {
+		left: 0;
+	}
+     
 }
