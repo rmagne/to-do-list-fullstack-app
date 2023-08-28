@@ -1,13 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 const app = express();
 
-app.use(express.json());
-app.use(cors());
+const salt = bcrypt.genSaltSync(10);
+const secret = ('vrcezr6fcererf4154r');
 
-const db_uri = "mongodb+srv://romif:OW69ZleXRZfObhRS@cluster0.k1h7bvo.mongodb.net/mern-todo?retryWrites=true&w=majority";
+app.use(express.json());
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cookieParser());
+
+const db_uri = "mongodb+srv://romif:JYTa1MBiIgG1vsO2@cluster0.k1h7bvo.mongodb.net/mern-todo?retryWrites=true&w=majority";
+
 
 mongoose.connect(db_uri, {
     useNewUrlParser: true,
@@ -16,32 +23,95 @@ mongoose.connect(db_uri, {
     .then(() => console.log("Connected to DB"))
     .catch(console.error);
 
+
+
+
+const User = require('./models/User')
+
+app.post('/register', async (req, res) => {
+    try {
+        const { newUser, newPassword } = req.body;
+        const user = await User.create({ Username: newUser, Password: bcrypt.hashSync(newPassword, salt) });
+        res.json(user);
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ error: err.message || 'An error occurred' });
+    }
+});
+
+
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const user = await User.findOne({ Username: username });
+        const passOk = bcrypt.compareSync(password, user.Password);
+        if (passOk) {
+            jwt.sign({ username, id: user._id }, secret, {}, (err, token) => {
+                if (err) throw err;
+                res.cookie('token', token).json({
+                    id: user._id,
+                    username
+                });
+            });
+        } else {
+            res.status(400).json('Wrong credentials');
+        }
+
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ error: err.message || 'An error occurred' });
+    }
+});
+
+app.get('/profile', (req, res) => {
+    const { token } = req.cookies;
+    jwt.verify(token, secret, {}, (err, info) => {
+        if (err) throw err;
+        res.json(info);
+    });
+});
+
+
+app.post('/logout', (req, res) => {
+    res.cookie('token', '').json('ok');
+})
+
 const Todo = require('./models/Todo');
 
 app.get('/todos', async (req, res) => {
 
     try {
-        const todos = await Todo.find();
+        const { token } = req.cookies;
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) throw err;
+        const todos = await Todo.find({user: info.id});
 
         res.json(todos);
+        })
 
     } catch (err) {
-        console.error;
+        console.error(err);
         res.status(500).json({ error: err.message || 'An error occurred' });
     }
 });
 
-
-app.post('/todo/new', (req, res) => {
+app.post('/todo/new', async (req, res) => {
 
     try {
-        const todo = new Todo({
-            text: req.body.text
+        const { token } = req.cookies;
+
+
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) throw err;
+          
+            const todo = new Todo({
+                text: req.body.text,
+                user: info.id
+            });
+    
+           await todo.save();
+            res.json(todo);
         });
-
-        todo.save();
-
-        res.json(todo);
     } catch (err) {
         console.error;
         res.status(500).json({ error: err.message || 'An error occurred' });
