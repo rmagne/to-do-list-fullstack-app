@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 const salt = bcrypt.genSaltSync(10);
 const secret = ('vrcezr6fcererf4154r');
@@ -139,4 +140,4 @@ app.put('/todo/complete/:id', async (req, res) => {
     }
 });
 
-app.listen(3001, () => console.log("Server started on port 3001"));
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
