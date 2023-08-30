@@ -1,6 +1,9 @@
 import {useState} from 'react';
 
-const API_BASE = "http://localhost:3001";
+const BackendPort = process.env.PORT || 3001;
+
+
+const API_BASE = `http://localhost:${BackendPort}`;
 
 function Register() {
 
