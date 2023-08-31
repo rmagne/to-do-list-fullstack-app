@@ -27,7 +27,8 @@ mongoose.connect(db_uri, {
 
 
 
-const User = require('./models/User')
+const path = require('path');
+const User = require(path.join(__dirname, './models/User'));
 
 app.post('/register', async (req, res) => {
     try {
@@ -70,7 +71,7 @@ app.post('/logout', (req, res) => {
     res.cookie('token', '').json('ok');
 })
 
-const Todo = require('./models/Todo');
+const Todo = require(path.join(__dirname, './models/Todo'));
 
 app.get('/todos', async (req, res) => {
 
