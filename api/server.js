@@ -11,7 +11,7 @@ const salt = bcrypt.genSaltSync(10);
 const secret = ('vrcezr6fcererf4154r');
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors({ credentials: true, origin: 'https://todolist-fullstack-app.onrender.com' }));
 app.use(cookieParser());
 
 const db_uri = "mongodb+srv://romif:JYTa1MBiIgG1vsO2@cluster0.k1h7bvo.mongodb.net/mern-todo?retryWrites=true&w=majority";
