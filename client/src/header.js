@@ -4,10 +4,8 @@ import { UserContext } from "./userContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-const BackendPort = process.env.PORT || 3001;
 
-
-const API_BASE = `http://localhost:${BackendPort}`;
+const API_BASE = 'https://todolist-app-p9j6.onrender.com:10000';
 
 function Header() {
     const { setUserInfo, userInfo } = useContext(UserContext);
