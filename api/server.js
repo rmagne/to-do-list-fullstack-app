@@ -25,7 +25,9 @@ mongoose.connect(db_uri, {
     .catch(console.error);
 
 
-
+app.get('/', (req, res) => {
+    console.log('backend is running');
+});
 
 const path = require('path');
 const User = require(path.join(__dirname, './models/User'));
