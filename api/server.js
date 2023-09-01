@@ -26,7 +26,9 @@ mongoose.connect(db_uri, {
 
 
 app.get('/', (req, res) => {
-    console.log('backend is running');
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.send("API is running");
+    console.log("API is running");
 });
 
 const path = require('path');
