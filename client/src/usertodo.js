@@ -27,7 +27,7 @@ function UserTodos() {
     };
 
     const completeTodo = async id => {
-        const data = await fetch(API_BASE + "/todo/complete/" + id, {
+        const data = await fetch("https://todolist-api-lj47.onrender.com/todo/complete/" + id, {
             method: 'PUT'
         })
             .then(res => res.json());
@@ -42,7 +42,7 @@ function UserTodos() {
     };
 
     const deleteTodo = async id => {
-        const data = await fetch(API_BASE + "/todo/delete/" + id, {
+        const data = await fetch("https://todolist-api-lj47.onrender.com/todo/delete/" + id, {
             method: 'DELETE'
         })
             .then(res => res.json());
@@ -50,7 +50,7 @@ function UserTodos() {
     };
 
     const addTodo = async () => {
-        const data = await fetch(API_BASE + "/todo/new", {
+        const data = await fetch("https://todolist-api-lj47.onrender.com/todo/new", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
