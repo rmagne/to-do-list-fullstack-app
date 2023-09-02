@@ -48,6 +48,8 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {
     try {
         console.log("request made");
+        res.json({status: "ok"})
+        /*
         const { username, password } = req.body;
         const user = await User.findOne({ Username: username });
         const passOk = bcrypt.compareSync(password, user.Password);
@@ -61,7 +63,7 @@ app.post('/login', async (req, res) => {
             });
         } else {
             res.status(400).json('Wrong credentials');
-        }
+        }*/
 
     } catch (err) {
         console.error(err);
@@ -80,13 +82,16 @@ const Todo = require(path.join(__dirname, './models/Todo'));
 app.get('/todos', async (req, res) => {
 
     try {
+        /*
         const { token } = req.cookies;
         jwt.verify(token, secret, {}, async (err, info) => {
             if (err) throw err;
         const todos = await Todo.find({user: info.id});
 
         res.json(todos);
-        })
+        })*/
+        const todos = await Todo.find();
+        res.json(todos);
 
     } catch (err) {
         console.error(err);
