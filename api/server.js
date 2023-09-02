@@ -13,6 +13,10 @@ const secret = ('vrcezr6fcererf4154r');
 app.use(express.json());
 app.use(cors({ credentials: true }));
 app.use(cookieParser());
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://todolist-fullstack-app.onrender.com');
+    next();
+  });
 
 const db_uri = "mongodb+srv://romif:JYTa1MBiIgG1vsO2@cluster0.k1h7bvo.mongodb.net/mern-todo?retryWrites=true&w=majority";
 
@@ -24,11 +28,6 @@ mongoose.connect(db_uri, {
     .then(() => console.log("Connected to DB"))
     .catch(console.error);
 
-
-app.get('/', (req, res) => {
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.send("API is running");
-});
 
 const path = require('path');
 const User = require(path.join(__dirname, './models/User'));
@@ -81,17 +80,13 @@ const Todo = require(path.join(__dirname, './models/Todo'));
 app.get('/todos', async (req, res) => {
 
     try {
-        console.log("todos request made");
-        const todos = await Todo.find();
-        res.json(todos);
-        /*
         const { token } = req.cookies;
         jwt.verify(token, secret, {}, async (err, info) => {
             if (err) throw err;
         const todos = await Todo.find({user: info.id});
 
         res.json(todos);
-        })*/
+        });
 
     } catch (err) {
         console.error(err);
@@ -101,7 +96,7 @@ app.get('/todos', async (req, res) => {
 
 app.post('/todo/new', async (req, res) => {
 
-    try { /*
+    try { 
         const { token } = req.cookies;
 
 
@@ -115,12 +110,7 @@ app.post('/todo/new', async (req, res) => {
     
            await todo.save();
             res.json(todo);
-        });*/
-        const todo = new Todo({
-            text: req.body.text
         });
-        await todo.save();
-        res.json(todo);
     } catch (err) {
         console.error;
         res.status(500).json({ error: err.message || 'An error occurred' });
