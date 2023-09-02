@@ -1,9 +1,6 @@
 import {useState} from 'react';
 
-const BackendPort = process.env.PORT || 3001;
-
-
-const API_BASE = 'https://todolist-app-p9j6.onrender.com:10000';
+const API_BASE = "http://localhost:3001";
 
 function Register() {
 

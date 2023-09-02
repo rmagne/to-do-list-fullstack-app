@@ -5,13 +5,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const app = express();
-const PORT = process.env.PORT || 3001;
 
 const salt = bcrypt.genSaltSync(10);
 const secret = ('vrcezr6fcererf4154r');
 
 app.use(express.json());
-app.use(cors({ credentials: true }));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(cookieParser());
 
 const db_uri = "mongodb+srv://romif:JYTa1MBiIgG1vsO2@cluster0.k1h7bvo.mongodb.net/mern-todo?retryWrites=true&w=majority";
@@ -25,13 +24,9 @@ mongoose.connect(db_uri, {
     .catch(console.error);
 
 
-app.get('/', (req, res) => {
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.send("API is running");
-});
 
-const path = require('path');
-const User = require(path.join(__dirname, './models/User'));
+
+const User = require('./models/User')
 
 app.post('/register', async (req, res) => {
     try {
@@ -81,7 +76,7 @@ app.post('/logout', (req, res) => {
     res.cookie('token', '').json('ok');
 })
 
-const Todo = require(path.join(__dirname, './models/Todo'));
+const Todo = require('./models/Todo');
 
 app.get('/todos', async (req, res) => {
 
@@ -151,4 +146,4 @@ app.put('/todo/complete/:id', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(3001, () => console.log("Server started on port 3001"));
