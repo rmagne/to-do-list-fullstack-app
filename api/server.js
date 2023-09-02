@@ -82,13 +82,16 @@ app.get('/todos', async (req, res) => {
 
     try {
         console.log("todos request made");
+        const todos = await Todo.find();
+        res.json(todos);
+        /*
         const { token } = req.cookies;
         jwt.verify(token, secret, {}, async (err, info) => {
             if (err) throw err;
         const todos = await Todo.find({user: info.id});
 
         res.json(todos);
-        })
+        })*/
 
     } catch (err) {
         console.error(err);
@@ -98,7 +101,7 @@ app.get('/todos', async (req, res) => {
 
 app.post('/todo/new', async (req, res) => {
 
-    try {
+    try { /*
         const { token } = req.cookies;
 
 
@@ -112,7 +115,12 @@ app.post('/todo/new', async (req, res) => {
     
            await todo.save();
             res.json(todo);
+        });*/
+        const todo = new Todo({
+            text: req.body.text
         });
+        await todo.save();
+        res.json(todo);
     } catch (err) {
         console.error;
         res.status(500).json({ error: err.message || 'An error occurred' });
