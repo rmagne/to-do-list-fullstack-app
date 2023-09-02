@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { UserContext } from './userContext';
 
 
-const API_BASE = 'https://todolist-app-p9j6.onrender.com:10000';
+const API_BASE = 'https://todolist-api-lj47.onrender.com';
 
 function Login() {
 
@@ -14,7 +14,7 @@ function Login() {
 
   async function login(ev) {
     ev.preventDefault();
-    const response = await fetch(API_BASE + '/login', {
+    const response = await fetch('https://todolist-api-lj47.onrender.com/login', {
       method: 'POST',
       body: JSON.stringify({ username, password }),
       headers: { 'Content-type': 'application/json' },

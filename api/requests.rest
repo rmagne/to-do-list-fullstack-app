@@ -1,8 +1,8 @@
-GET http://localhost:3001/todos
+GET https://todolist-api-lj47.onrender.com/todos
 
 ###
 
-POST http://localhost:3001/todo/new
+POST https://todolist-api-lj47.onrender.com/todo/new
 Content-Type: application/json
 
 {
@@ -11,11 +11,11 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/todo/delete/64d4efb205a3dd1ab6dbdb54
+DELETE https://todolist-api-lj47.onrender.com/todo/delete/64f2fc8391aed48e84debb47
 
 ###
 
-PUT http://localhost:3001/todo/complete/64d8aa6f6bcac83a54738962
+PUT https://todolist-api-lj47.onrender.com/todo/complete/64f2fc8391aed48e84debb47
 
 ###
 

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 
-const API_BASE = 'https://todolist-app-p9j6.onrender.com:10000';
+const API_BASE = 'https://todolist-api-lj47.onrender.com';
 
 function Header() {
     const { setUserInfo, userInfo } = useContext(UserContext);
@@ -20,7 +20,7 @@ function Header() {
     }, [setUserInfo]);
 
     function logout() {
-        fetch(API_BASE + '/logout', {
+        fetch('https://todolist-api-lj47.onrender.com/logout', {
             credentials: 'include',
             method: 'POST'
         });

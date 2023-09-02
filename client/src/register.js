@@ -1,9 +1,9 @@
 import {useState} from 'react';
 
-const BackendPort = process.env.PORT || 3001;
+const BackendPort = process.env.PORT || 10000;
 
 
-const API_BASE = 'https://todolist-app-p9j6.onrender.com:10000';
+const API_BASE = 'https://todolist-api-lj47.onrender.com';
 
 function Register() {
 
@@ -12,7 +12,7 @@ function Register() {
 
     async function register(ev) {
       ev.preventDefault();
-       const response = await fetch(API_BASE + '/register', {
+       const response = await fetch('https://todolist-api-lj47.onrender.com/register', {
         method: 'POST',
         body: JSON.stringify({newUser, newPassword}),
         headers: {'Content-type': 'application/json'}
