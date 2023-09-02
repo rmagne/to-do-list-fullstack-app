@@ -91,6 +91,7 @@ app.get('/todos', async (req, res) => {
         res.json(todos);
         })*/
         const todos = await Todo.find();
+        console.log("get todos works");
         res.json(todos);
 
     } catch (err) {
@@ -102,6 +103,7 @@ app.get('/todos', async (req, res) => {
 app.post('/todo/new', async (req, res) => {
 
     try {
+        /*
         const { token } = req.cookies;
 
 
@@ -115,7 +117,11 @@ app.post('/todo/new', async (req, res) => {
     
            await todo.save();
             res.json(todo);
+        });*/
+        const todo = new Todo({
+            text: "create todos works"
         });
+        await todo.save();
     } catch (err) {
         console.error;
         res.status(500).json({ error: err.message || 'An error occurred' });
