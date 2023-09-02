@@ -9,14 +9,16 @@ const PORT = process.env.PORT || 3001;
 
 const salt = bcrypt.genSaltSync(10);
 const secret = ('vrcezr6fcererf4154r');
+const corsOptions = {
+    origin: 'https://todolist-fullstack-app.onrender.com',
+    credentials: true,
+  };
+  
 
 app.use(express.json());
-app.use(cors({ credentials: true }));
+app.use(cors(corsOptions));
 app.use(cookieParser());
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://todolist-fullstack-app.onrender.com');
-    next();
-  });
+
 
 const db_uri = "mongodb+srv://romif:JYTa1MBiIgG1vsO2@cluster0.k1h7bvo.mongodb.net/mern-todo?retryWrites=true&w=majority";
 
